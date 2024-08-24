@@ -1,3 +1,55 @@
+/*
+
+    Paper Implemented: Dynamic Attribute Based Group Signature with Attribute Anonymity and Tracing in the Standard Model
+        - Syed Taqi Ali and B.B. Amberker
+
+    Short SUMMARY of the Paper:
+        - The aim of the scheme is to allow any member of a certain group to sign a message on behalf of the group,
+        but the signer remains anonymous within the group.
+        - However, in certain situations, an authority should have the ability to evoke the anonymity of a signer and
+        trace the signature.
+        - Use in Anonymous attestation, which has practical applications such as in building Trusted Platform Modules
+        (TPMs).
+        - Attribute Anonymity: Ensures that the attributes used for signing remain hidden, enhancing the privacy of the
+        signer.
+        - Attribute Tracing: Allows the tracing of attributes used in a signature without revealing the identity of the
+        signer.
+        - Constant Signature Size: The scheme maintains a fixed signature size, independent of the number of attributes.
+
+    CONCEPTS explained:
+    - Pairing based cryptography
+        * Cryptography with use of a pairing between elements of two cryptographic groups to a third group with a
+        mapping e: G1*G2-> GT.
+        * If G1=G2, then the pairing is called SYMMETRIC PAIRING, which is used in this program
+        * If G1 != G2, then the pairing is called ASYMMETRIC PAIRING
+    - BILINEAR MAP:
+        * The map from two groups G1, G2 to a third group GT is the bilinear map.
+        (In pbc library, the G1 and G2 groups associated with pairings, are groups of points on an ellitpic curve; GT
+        group is currently implemented as a subgroup of a finite field)
+        * Denoted (as observed at many places, including the research paper being implemented) with e
+    - Properties of bilinear pairing:
+        * Bilinearity: e(g^a, h^b) = e(g^b, h^a) = e(g,h)^(ab), where g,h are generators of group G1 & G2 respectively.
+        * Non-degenerate: If g,h are generator of G,H then e(g,h) is generator of GT
+
+    The comments/description should be read according to the following:
+        - Jump to the main function and start reading the comments
+        - Whenever a function call is made, jump to the function body and read comments written just above & inside the
+        function body
+        - References are mentioned in the format [REF-<Number>]
+
+    IMPORTANT NOTE : Whenever a FUNCTION/DATA-TYPE is encountered for the first time according to the flow mentioned
+    above, it is explained in the 'REF.txt' file. For the next time, the Duplicate explanation is avoided. If an
+    explanation to FUNCTION/DATA-TYPE is required next time it is being read, please search it in 'REF.txt' file, note
+    the reference number & search the explanation of function/data-type by searching [REF-<Number>].
+
+    [It took more effort to avoid duplicate explanation, than it would have taken by writing explanation again.
+    Since, it was a good practice to avoid duplicate explanation, I have used such a technique.]
+
+    Following is the WORKING CODE (with comments & descriptions at suitable places) in C programming language for the
+    Section "4 Construction" of the paper. The output for the code is present in the file 'output.txt'.
+
+    The code can be compiled using - 'gcc dev.c -lpbc -lgmp' and can be executed using './a.out'
+*/
 #include <stdio.h>
 #include <pbc/pbc.h>
 #include <gmp.h>
@@ -6,7 +58,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define num_user 1    //Define the global variable for total number of users
+#define num_user 4    //Define the global variable for total number of users
 
 typedef struct Node {
     mpz_t name; //Index number or Identity of node
@@ -59,6 +111,9 @@ typedef struct secret {
 secret private;
 // The private is variable for the structure secret which means the secret values
 
+/*
+    The user_output structure is used to store data which is at user end
+*/
 typedef struct user_output {
     long unsigned int i; // user's name
     mpz_t upki; // user public key
@@ -101,11 +156,13 @@ typedef struct user_output {
     element_t *sigma5; // commitment of rho5
 } user_output;
 
-// The user_output structure is used to store data which is at user end
 
 user_output U[num_user];
 // The U is the structure user_output
 
+/*
+    The reg structure is used to store data which is at Register/user.
+*/
 typedef struct reg {
     long unsigned int i; // user's register name
     mpz_t upki; // user public key
@@ -126,12 +183,12 @@ typedef struct reg {
     element_t z; // Random element for encryption
 } reg;
 
-// The reg structure is used to store data which is at Register/user
-
 reg R[num_user];
 // The R is the structure reg as (index number + 1) as user's identity
 
-// random_prime_bits() function to make a prime number using given number of bites
+/*
+    random_prime_bits() function to make a prime number using given number of bits.
+*/
 void random_prime_bits(mpz_t result, mpz_t n) {
     // Declare variable random
     mpz_t random; //REF-01
@@ -166,7 +223,9 @@ void random_prime_bits(mpz_t result, mpz_t n) {
     }
 }
 
-// generate_rsa_keys() function is used to generate keys for applying the RSA crypto algorithm
+/*
+    generate_rsa_keys() function is used to generate keys for applying the RSA crypto algorithm.
+*/
 void generate_rsa_keys(mpz_t n, mpz_t d, mpz_t e, gmp_randstate_t state) {
     mpz_t p, q, phi; //REF-01
     mpz_inits(p, q, phi, NULL); //REF-02
@@ -190,7 +249,9 @@ void generate_rsa_keys(mpz_t n, mpz_t d, mpz_t e, gmp_randstate_t state) {
     mpz_clears(p, q, phi, NULL);
 }
 
-// insertionSort() function is the sorting algorithm using insertion sort for proper orientation for storing attributes
+/*
+    insertionSort() function is the sorting algorithm using insertion sort for proper orientation for storing attributes.
+*/
 void insertionSort(long unsigned int arr[], long unsigned int n) {
     int key, j;
     for (int i = 1; i < n; i++) {
@@ -206,13 +267,20 @@ void insertionSort(long unsigned int arr[], long unsigned int n) {
     }
 }
 
-// initializeNode() function is used to intialize the node for avoiding segmentation faults and using node structure easily
+/*
+    initializeNode() function is used to initialize the node for avoiding segmentation faults and using node structure
+    easily for further operations.
+*/
 void initializeNode(Node *node) {
     mpz_init(node->name); //REF-02
     mpf_init(node->secret_value); //REF-50
     node->threshold = 1; // Set default threshold = 1
 }
 
+/*
+    tree_making() function takes the no. of dummy nodes dummy, no. of child nodes temp1, total no. of nodes max, and
+    attribute set A[], Dummy nodes T_d, Secret values S and a verifying factor z and output the required tree.
+*/
 void tree_making(mpz_t dummy, mpz_t temp1, mpz_t max, long unsigned int A[], Node *T_d, mpz_t *S, long unsigned int z) {
     Node *T = (Node *) malloc(mpz_get_ui(temp1) * sizeof(Node)); //REF-09
     long unsigned int i = 0;
@@ -314,6 +382,10 @@ void tree_making(mpz_t dummy, mpz_t temp1, mpz_t max, long unsigned int A[], Nod
     }
 }
 
+/*
+    verify_tree() function is used to verify whether e(groot, g2)==e(g1, vT) . If not, then the public values of
+    predicate is invalid. It temporarily stores the tree in public repository.
+*/
 void verify_tree(long unsigned int A[], mpz_t dummy, mpz_t temp1, mpz_t max, Node *T_d, unsigned long int z) {
     Node *T = (Node *) malloc(mpz_get_ui(temp1) * sizeof(Node));
     mpz_t *S = (mpz_t *) malloc(mpz_get_ui(ret_setup.a) * sizeof(mpz_t)); //REF-01
@@ -409,7 +481,9 @@ void verify_tree(long unsigned int A[], mpz_t dummy, mpz_t temp1, mpz_t max, Nod
     gmp_printf("st2  : %Zd\n", sT2); //REF-14
 }
 
-// setup() function is used to generate parameters and make the setup algorithm
+/*
+    setup(1^k) Algorithm takes the security parameter k as an input and returns the system parameter params.
+*/
 void setup(public *retval, mpz_t k) {
     printf("\n----------------Setup Algorithm------------------\n");
     mpz_t p; //REF-01
@@ -496,8 +570,10 @@ void setup(public *retval, mpz_t k) {
     retval->generators_G2 = generators_g2;
 }
 
-// keygen() function takes an input system parameters params and outputs a group public key gpk, an issuing key ,a user
-// opening key ok_user (alpha1) and an attribute tracing key (alpha1_dash)
+/*
+    keygen() Algorithm takes the system parameters params and returns a group public key gpk, an issuing key ik, a user
+    opening key ok_user (alpha1) and an attribute tracing key (alpha1_dash)
+*/
 void keygen(char *M, public *ret_val, secret *sec_val) {
     printf("\n----------------KenGen Algorithm------------------\n");
 
@@ -629,6 +705,11 @@ void keygen(char *M, public *ret_val, secret *sec_val) {
     element_printf("Tracer key = %B\n", alpha1_dash); //REF-30
 }
 
+/*
+    join() Algorithm is an interactive group joining protocol between a user Ui (using his secret key uski) and the
+    group manager GM (using the issuing key ik and the set of attributes for user Ui).
+    In this protocol Ui ends with a member private key ski and GM ends with an updated registration table Reg.
+*/
 void join(public *retval, unsigned long int j, user_output *U_val, reg *rval, secret *sec_val) {
     printf("\n----------------Joint Algorithm for User U%lu------------------\n", j);
 
@@ -723,7 +804,7 @@ void join(public *retval, unsigned long int j, user_output *U_val, reg *rval, se
     for (long unsigned int i = 0; i < mpz_get_ui(a); i++) {
         //REF-09
         long unsigned int x = A[i];
-        element_printf("  T%lu_%lu : %B\n", j, x, Ti[x]); //REF-30
+        element_printf("  T%lu_%lu : %B\n", j, x+1, Ti[x]); //REF-30
     }
 
     element_t yi, Yi, temp1, temp2, temp3, temp4, temp_g2; //REF-19
@@ -844,6 +925,10 @@ void join(public *retval, unsigned long int j, user_output *U_val, reg *rval, se
     printf("\n");
 }
 
+/*
+    buildtree() algorithm takes params and secret values and outputs public values of predicate and the dummy nodes
+    and stores i in public repository.
+*/
 void buildtree(public *retval, mpz_t *S) {
     printf("\n----------------Build Tree Algorithm------------------\n");
     long unsigned int i = 0;
@@ -932,6 +1017,10 @@ void buildtree(public *retval, mpz_t *S) {
     printf("\n");
 }
 
+/*
+    buildtreevalidity() algorithm takes params , group public key gpk and Tree Extension and verifies whether the
+    published values of the predicate are correct one .
+*/
 void buildtreevalidity(public *retval) {
     printf("\n----------------Build Tree Validity Algorithm------------------\n");
     gmp_randstate_t state; //REF-04
@@ -969,6 +1058,10 @@ void buildtreevalidity(public *retval) {
     verify_tree(A, retval->d, retval->temp1, retval->max, ret_setup.T_d, 0);
 }
 
+/*
+    sign() algorithm takes params, gpk, ski, an attribute set A, message M, and the predicate as an input and returns a
+    group signature sigma on M.
+*/
 void sign(user_output *U_val) {
     gmp_printf("\n*----------------Sign Algorithm for U%lu------------------\n", U_val->i); //REF-14
     printf("Attributes :");
@@ -1247,6 +1340,11 @@ void sign(user_output *U_val) {
     U_val->sigma5 = sigma5;
 }
 
+/*
+    verify() algorithm is a deterministic algorithm verifies the validity of the group signature sigma against gpk and
+    returns 1/0.
+    If 1 then the algorithm claims that the σ is a valid group signature, otherwise,sigma is invalid.
+*/
 void verify(user_output *U_val) {
     mpz_t temp1; //REF-01
     mpz_init(temp1); //REF-02
@@ -1270,6 +1368,11 @@ void verify(user_output *U_val) {
         printf("\nx-x-x-Verify algorithm invalid-x-x-x\n");
 }
 
+/*
+    openuser() algorithm is a deterministic algorithm which takes as input params, gpk, okuser ,sigma, M and reg, and
+    returns either i ≥ 1 or NULL . If i, the algorithm claims that the group member with identity i has produced sigma,
+    and if NULL, then no group member produced sigma.
+*/
 void openuser(user_output *U_val, reg *rval, element_t ok_user) {
     if (private.alpha1 == ok_user) {
         printf("\n*----------OpenUser verified-----------");
@@ -1318,6 +1421,11 @@ void openuser(user_output *U_val, reg *rval, element_t ok_user) {
         printf("\n-x-x-x-Open User Verification failed-x-x-x-\n");
 }
 
+/*
+    traceatt() algorithm is a deterministic algorithm which takes as input params, gpk, tk_att(alpha1_dash) , sigma,
+    and M, and outputs either the attribute set  ⊆ Att or NULL. Here it claims that the attribute set that is used to
+    satisfy in producing σ. If NULL, then the algorithm claims that no attribute set is used to produce σ.
+*/
 void traceatt(user_output *U_val, reg *rval, element_t tk_att) {
     if (private.alpha1_dash == tk_att) {
         gmp_printf("\n----Tracer is valid----\n"); //REF-14
@@ -1341,30 +1449,35 @@ void traceatt(user_output *U_val, reg *rval, element_t tk_att) {
 
         element_t rho5_verify; //REF-19
         element_init_G1(rho5_verify, ret_setup.pairing); //REF-20
-        if (mpz_cmp_ui(rval[U_val->i - 1].sT2, 0) > 0) {
+        if (mpz_cmp_ui(R[U_val->i - 1].sT2, 0) > 0) {
             //REF-07
             element_pow_mpz(rho5_verify, ret_setup.generators_G1[0], R[U_val->i - 1].sT2); //REF-26
         } else {
-            mpz_t temp1; //REF-01
-            mpz_init_set(temp1, R[U_val->i - 1].sT2); //REF-54
-            mpz_abs(temp1, temp1); //REF-56
-            element_pow_mpz(rho5_verify, ret_setup.generators_G1[0], temp1); //REF-26
+            mpz_t tempe1; //REF-01
+            mpz_init_set(tempe1, R[U_val->i - 1].sT2); //REF-54
+            mpz_abs(tempe1, tempe1); //REF-56
+            element_pow_mpz(rho5_verify, ret_setup.generators_G1[0], tempe1); //REF-26
             element_invert(rho5_verify, rho5_verify); //REF-36
         }
 
-        gmp_printf("U%lu Attribute Name: ", U_val->i);
         if (element_cmp(rho5_verify, sigma5_verify[1]) == 0) {
             //REF-27
+            gmp_printf("U%lu Attribute Name: ", U_val->i);
             for (long unsigned int i = 0; i < (U_val->a); i++) {
                 gmp_printf("   %lu", U_val->A[i] + 1); //REF-14
             }
             printf("\n");
         } else
             printf("\n\t-*-*-Wrong or No User Identity-*-*- ");
+        element_clear(rho5_verify);
     } else
         gmp_printf("\n----Tracer is invalid----\n"); //REF-14
 }
 
+/*
+    main() function is the starting point of the "Dynamic Attribute based Group Signature with Attribute Anonymity and
+    Tracing in the Standard Model - Syed Taqi Ali and B. B. Amberkar" Scheme.
+*/
 int main() {
     srand(time(NULL)); // define the state for random functions
     mpz_t security_parameter; //REF-01
