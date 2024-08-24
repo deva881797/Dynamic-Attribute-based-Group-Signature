@@ -804,7 +804,7 @@ void join(public *retval, unsigned long int j, user_output *U_val, reg *rval, se
     for (long unsigned int i = 0; i < mpz_get_ui(a); i++) {
         //REF-09
         long unsigned int x = A[i];
-        element_printf("  T%lu_%lu : %B\n", j, x+1, Ti[x]); //REF-30
+        element_printf("  T%lu_%lu : %B\n", j, x + 1, Ti[x]); //REF-30
     }
 
     element_t yi, Yi, temp1, temp2, temp3, temp4, temp_g2; //REF-19
@@ -1343,7 +1343,7 @@ void sign(user_output *U_val) {
 /*
     verify() algorithm is a deterministic algorithm verifies the validity of the group signature sigma against gpk and
     returns 1/0.
-    If 1 then the algorithm claims that the σ is a valid group signature, otherwise,sigma is invalid.
+    If 1 then the algorithm claims that the sigma is a valid group signature, otherwise,sigma is invalid.
 */
 void verify(user_output *U_val) {
     mpz_t temp1; //REF-01
