@@ -1,5 +1,4 @@
 /*
-
     Paper Implemented: Dynamic Attribute Based Group Signature with Attribute Anonymity and Tracing in the Standard Model
         - Syed Taqi Ali and B.B. Amberker
 
@@ -50,6 +49,7 @@
 
     The code can be compiled using - 'gcc dev.c -lpbc -lgmp' and can be executed using './a.out'
 */
+
 #include <stdio.h>
 #include <pbc/pbc.h>
 #include <gmp.h>
@@ -58,7 +58,8 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define num_user 4    //Define the global variable for total number of users
+//Define the global variable for total number of users
+#define num_user 4
 
 typedef struct Node {
     mpz_t name; //Index number or Identity of node
