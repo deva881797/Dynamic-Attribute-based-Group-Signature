@@ -68,45 +68,148 @@
         According to PBC manual, it initializes a pairing (to be directly used for generating groups etc.) with pairing
          parameters p.
 
-19. REF-19 : void element_init_G1(element_t e, pairing_t pairing)
+19. REF-19 : element_t
+        It is a data type (offered by pbc library), that stores the elements of groups, rings and fields.
+
+20. REF-20 : void element_init_G1(element_t e, pairing_t pairing)
         The function initializes e to be an element of the group G1 of the pairing.
         When an element is initialized it is associated with an algebraic structure, such as a particular finite field
          or elliptic curve group.
 
-20. REF-20 : void element_init_G2(element_t e, pairing_t pairing)
+21. REF-21 : void element_init_G2(element_t e, pairing_t pairing)
         The function initializes e to be an element of the group G2 of the pairing similar to REF-19.
 
-21. REF-21 : void element_init_G2(element_t e, pairing_t pairing)
+22. REF-22 : void element_init_GT(element_t e, pairing_t pairing)
         The function initializes e to be an element of the group GT of the pairing similar to REF-19.
 
-22. REF-22 : void element_set0(element_t e)
+23. REF-23 : void element_set0(element_t e)
         For groups of points on an ellitpic curve, such as the G1 and G2 groups associated with pairings, both 0 and 1
          represent the identity element.
         Hence, setting element to 0 means setting element to identity element of G1/G2.
 
-23. REF-23 : void mpz_add_ui (mpz_t rop, const mpz_t op1, unsigned long int op2)
+24. REF-24 : void mpz_add_ui (mpz_t rop, const mpz_t op1, unsigned long int op2)
         Set rop to op1 + op2.
 
-24. REF-24 : void element_random(element_t e)
+25. REF-25 : void element_random(element_t e)
         Function provided by pbc library, it assigns a uniformly random element to e (as e lies in a group).
 
-25. REF-25 : void element_pow_mpz(element_t rop, element_t e, mpz_t a)
+26. REF-26 : void element_pow_mpz(element_t rop, element_t e, mpz_t a)
         Provided by pbc library
         Computes e^a and assigns to rop. Here, e is element of group (or any other structure
         i.e. of type element_t) and a is of type mpz_t.
 
-26. REF-26 : int element_cmp(element_t a, element_t b)
+27. REF-27 : int element_cmp(element_t a, element_t b)
         Provided by pbc library
         Returns 0 if a and b are the same, nonzero otherwise.
 
-27. REF-27 : void element_set(element_t e, element_t a)
+28. REF-28 : void element_set(element_t e, element_t a)
         Provided by pbc library
         Set e to a.
 
-28. REF-28 :
+29. REF-29 : void element_mul(element_t rop, element_t p, element_t q)
+        Provided by PBC library. Sets rop to p*q.
+        The function is used for multiplying elements of groups etc.
 
+30. REF-30 : int element_printf(const char *format, …)
+        Provided by pbc library, it prints the element to console.
 
+31. REF-31 : void element_init_Zr(element_t e, pairing_t pairing)
+        Provided by pbc library
+        Initialize e to be an element of the ring Z_r of pairing. r is the order of the groups G1, G2 and GT that are
+         involved in the pairing.
 
+32. REF-32 : void element_mul_zn(element_t c, element_t a, element_t z)
+        z must be an element of a integer mod ring (i.e. Zn for some n). Set c = a z, that is a + a + … + a where there
+         are z a's.
 
+33. REF-33 : void mpz_urandomm (mpz t rop, gmp randstate t state, const mpz t n)
+        Provided by gmp library, it generates a uniform random integer in the range 0 to n − 1, both included.
 
+34. REF-34 : void element_pow_zn(element_t x, element_t a, element_t n)
+        Set x = a^n, where n is an element of a ring ZN for some N (typically the order of the algebraic structure x
+         lies in).
 
+35. REF-35 : void element_add(element_t n, element_t a, element_t b)
+        Set n to a + b.
+
+36. REF-36 : void element_invert(element_t a, element_t b)
+        Provided by pbc library, it assigns inverse of element b to element a
+
+37. REF-37 : void element_mul_mpz(element_t n, element_t a, mpz_t z)
+        Set n = a*z.
+
+38. REF-38 : void element_pairing(element_t out, element_t in1, element_t in2)
+        Provided by pbc library, it computes a pairing: out = e(in1, in2), where in1, in2, out must be in the groups
+         G1, G2, GT. (In our case, G1=G2)
+
+39. REF-39 : void element_to_mpz(mpz_t z, element_t e)
+        Converts e to a GMP integer z if such an operation makes sense
+
+40. REF-40 : Function: void mpz_add (mpz_t rop, const mpz_t op1, const mpz_t op2)
+        Set rop to op1 + op2.
+
+41. REF-41 : void mpz_nextprime(mpz_t rop, const mpz_t op);
+        Set rop to hold the smallest prime number greater than op.
+
+42. REF-42 : void mpz_mul (mpz_t rop, const mpz_t op1, const mpz_t op2)
+        Set rop to op1 times op2.
+
+43. REF-43 : void mpz_sub_ui (mpz_t rop, const mpz_t op1, unsigned long int op2)
+        Set rop to op1 − op2.
+
+44. REF-44 : int mpz_invert (mpz_t rop, const mpz_t op1, const mpz_t op2);
+        The function returns the inverse of an integer a modulo n, which is an integer b such that:
+            (a×b)mod n = 1
+        The function returns a non-zero value if the inverse exists (i.e., if op1 and op2 are coprime), and zero if
+         no inverse exists.
+
+45. REF-45 : void mpz_powm (mpz_t rop, const mpz_t base, const mpz_t exp, const mpz_t mod)
+        Set rop to (base raised to exp) modulo mod.
+
+46. REF-46 : void element_div(element_t n, element_t a, element_t b)
+        Set n = a / b.
+
+47. REF-47 : void mpz_ui_pow_ui (mpz_t rop, unsigned long int base, unsigned long int exp)
+        Set rop to base raised to exp. The case 0^0 yields 1.
+
+48. REF-48 : void mpf_set_z (mpf_t rop, const mpz_t op)
+        Set the value of rop from op.
+
+49. REF-49 : mpf_t
+        Data type offered by GMP library for storing large floating point number.
+
+50. REF-50 : void mpf_init (mpf_t x)
+        Initialize x to 0.
+
+51. REF-51 : void mpf_mul (mpf_t rop, const mpf_t op1, const mpf_t op2)
+        Set rop to op1 times op2.
+
+52. REF-52 : void mpf_sub (mpf_t rop, const mpf_t op1, const mpf_t op2)
+        Set rop to op1 − op2.
+
+53. REF-53 : void mpf_mul_ui (mpf_t rop, const mpf_t op1, unsigned long int op2)
+        Set rop to op1 times op2.
+
+54. REF-54 : void mpz_init_set(mpz_t rop, const mpz_t op)
+        Initialize rop, and set its value to op.
+
+55. REF-55 : void mpz_set_f (mpz_t rop, const mpf_t op)
+        Set the value of rop from op.
+
+56. REF-56 : void mpz_abs (mpz_t rop, const mpz_t op)
+        Set rop to the absolute value of op.
+
+57. REF-57 : void element_set_mpz(element_t e, mpz_t z)
+        Set e to z.
+
+58. REF-58 : void element_set_si(element_t e, signed long int i)
+        Set e to i.
+
+59. REF-59 : void mpf_div_ui (mpf_t rop, const mpf_t op1, unsigned long int op2)
+        Set rop to op1/op2.
+
+60. REF-60 : void mpf_add (mpf_t rop, const mpf_t op1, const mpf_t op2)
+        Set rop to op1 + op2.
+
+61. REF-61 : void mpz_neg (mpz_t rop, const mpz_t op)
+        Set rop to −op.
