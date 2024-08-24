@@ -3,7 +3,7 @@
                 Summer Training Project
                       VNIT Nagpur
 
-Submitted by:			        Guided by:
+Submitted by:			            Guided by:
 Devashish Arvind Ghate		    Dr. Syed Taqi Ali Sir
 BT22CSE023
 NIT Uttarakhand
