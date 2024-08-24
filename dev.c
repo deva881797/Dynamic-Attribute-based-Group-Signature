@@ -1,6 +1,18 @@
 /*
-    Paper Implemented: Dynamic Attribute Based Group Signature with Attribute Anonymity and Tracing in the Standard Model
-        - Syed Taqi Ali and B.B. Amberker
+
+                Summer Training Project
+                      VNIT Nagpur
+
+Submitted by:			        Guided by:
+Devashish Arvind Ghate		    Dr. Syed Taqi Ali Sir
+BT22CSE023
+NIT Uttarakhand
+
+ABOUT:
+- Guide:  Dr. Syed Taqi Ali Sir
+- Author: Devashish Arvind Ghate
+- Paper Implemented: Dynamic Attribute Based Group Signature with Attribute Anonymity and Tracing in the Standard Model
+    by Syed Taqi Ali & B. B. Amberker (https://link.springer.com/chapter/10.1007/978-3-642-41224-0_11)
 
     Short SUMMARY of the Paper:
         - The aim of the scheme is to allow any member of a certain group to sign a message on behalf of the group,
@@ -49,7 +61,6 @@
 
     The code can be compiled using - 'gcc dev.c -lpbc -lgmp' and can be executed using './a.out'
 */
-
 #include <stdio.h>
 #include <pbc/pbc.h>
 #include <gmp.h>
@@ -58,8 +69,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-//Define the global variable for total number of users
-#define num_user 4
+#define num_user 4    //Define the global variable for total number of users
 
 typedef struct Node {
     mpz_t name; //Index number or Identity of node
