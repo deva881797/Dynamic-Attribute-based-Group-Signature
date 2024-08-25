@@ -14,7 +14,7 @@ ABOUT:
 - Paper Implemented: Dynamic Attribute Based Group Signature with Attribute Anonymity and Tracing in the Standard Model
     by Syed Taqi Ali & B. B. Amberker (https://link.springer.com/chapter/10.1007/978-3-642-41224-0_11)
 
-      The code can be compiled using - 'gcc dev.c -lpbc -lgmp' and can be executed using './a.out'
+    **The code can be compiled using - 'gcc dev.c -lpbc -lgmp' and can be executed using './a.out'
 */
 
 #include <stdio.h>
