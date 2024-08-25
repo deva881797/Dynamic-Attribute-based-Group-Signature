@@ -7,17 +7,17 @@ ABOUT:
     by Syed Taqi Ali & B. B. Amberker (https://link.springer.com/chapter/10.1007/978-3-642-41224-0_11)
 
     Short SUMMARY of the Paper:
-        - The aim of the scheme is to allow any member of a certain group to sign a message on behalf of the group,
+      - The aim of the scheme is to allow any member of a certain group to sign a message on behalf of the group,
         but the signer remains anonymous within the group.
-        - However, in certain situations, an authority should have the ability to evoke the anonymity of a signer and
+      - However, in certain situations, an authority should have the ability to evoke the anonymity of a signer and
         trace the signature.
-        - Use in Anonymous attestation, which has practical applications such as in building Trusted Platform Modules
+      - Use in Anonymous attestation, which has practical applications such as in building Trusted Platform Modules
         (TPMs).
-        - Attribute Anonymity: Ensures that the attributes used for signing remain hidden, enhancing the privacy of the
+      - Attribute Anonymity: Ensures that the attributes used for signing remain hidden, enhancing the privacy of the
         signer.
-        - Attribute Tracing: Allows the tracing of attributes used in a signature without revealing the identity of the
+      - Attribute Tracing: Allows the tracing of attributes used in a signature without revealing the identity of the
         signer.
-        - Constant Signature Size: The scheme maintains a fixed signature size, independent of the number of attributes.
+      - Constant Signature Size: The scheme maintains a fixed signature size, independent of the number of attributes.
 
     CONCEPTS explained:
     - Pairing based cryptography
