@@ -2,7 +2,7 @@
     	Data type offered by GMP library for storing large integers.
 
 02. REF-02 : void mpz_init (mpz_t x) or mpz_inits(x1, x2, NULL):
-   	Implemented by the GMP library, the function initializes the variable passed and sets its value to 0
+   	    Implemented by the GMP library, the function initializes the variable passed and sets its value to 0
        	Pseudo code for self-implementation (instead of using mpz_init(mpz_t x)):
    	    	x = 0;
 
@@ -12,8 +12,8 @@
         	rop = op;
 
 04. REF-04 : gmp_randstate_t
-  	Random state means an algorithm selection and current state data. The data type (provided by gmp library) for
-  	 such objects is gmp_randstate_t. For example: gmp_randstate_t rstate;
+  	    Random state means an algorithm selection and current state data. The data type (provided by gmp library) for
+  	     such objects is gmp_randstate_t. For example: gmp_randstate_t rstate;
 
 05. REF-05 : void gmp_randinit_default (gmp_randstate_t state)
         Function provided by gmp library that initializes the state variable with a default algorithm.
@@ -26,10 +26,10 @@
         It returns a positive value if op1 > op2, zero if op1 == op2, or a negative value if op1 < op2.
 
 08. REF-08 : void mpz_ui_pow_ui (mpz_t rop, unsigned long int base, unsigned long int exp)
-	Function provided by gmp library to set rop to base^exp. According to the manual, 0^0 returns 1.
+	    Function provided by gmp library to set rop to base^exp. According to the manual, 0^0 returns 1.
 
 09. REF-09 : unsigned long int mpz_get_ui (const mpz t op)
-	Provided by gmp library, it returns the value of op as an unsigned long.
+	    Provided by gmp library, it returns the value of op as an unsigned long.
 
 10. REF-10 : void mpz_urandomb (mpz_t rop, gmp_randstate_t state, mp bitcnt t n)
         Function provided by gmp library to generate a uniformly distributed random integer in the range 0 to 2^n − 1,
@@ -51,9 +51,11 @@
             b = a;
 
 14. REF-14 : gmp_printf(const char *fmt, …)
+        Provided by gmp library.
         Print to the standard output stdout. Return the number of characters written, or -1 if an error occurred.
 
 15. REF-15 : pairing_t
+        Provided by pbc library.
         pairing_t is a data type offered by pbc library, that stores the bilinear pairings.
 
 16. REF-16 : pbc_param_t
@@ -72,22 +74,27 @@
         It is a data type (offered by pbc library), that stores the elements of groups, rings and fields.
 
 20. REF-20 : void element_init_G1(element_t e, pairing_t pairing)
+        Provided by pbc library.
         The function initializes e to be an element of the group G1 of the pairing.
         When an element is initialized it is associated with an algebraic structure, such as a particular finite field
          or elliptic curve group.
 
 21. REF-21 : void element_init_G2(element_t e, pairing_t pairing)
+        Provided by pbc library.
         The function initializes e to be an element of the group G2 of the pairing similar to REF-19.
 
 22. REF-22 : void element_init_GT(element_t e, pairing_t pairing)
+        Provided by pbc library.
         The function initializes e to be an element of the group GT of the pairing similar to REF-19.
 
 23. REF-23 : void element_set0(element_t e)
-        For groups of points on an ellitpic curve, such as the G1 and G2 groups associated with pairings, both 0 and 1
+        Provided by pbc library.
+        For groups of points on an elliptic curve, such as the G1 and G2 groups associated with pairings, both 0 and 1
          represent the identity element.
         Hence, setting element to 0 means setting element to identity element of G1/G2.
 
 24. REF-24 : void mpz_add_ui (mpz_t rop, const mpz_t op1, unsigned long int op2)
+        Provided by gmp library.
         Set rop to op1 + op2.
 
 25. REF-25 : void element_random(element_t e)
@@ -119,6 +126,7 @@
          involved in the pairing.
 
 32. REF-32 : void element_mul_zn(element_t c, element_t a, element_t z)
+        Provided by pbc library.
         z must be an element of a integer mod ring (i.e. Zn for some n). Set c = a z, that is a + a + … + a where there
          are z a's.
 
@@ -126,16 +134,19 @@
         Provided by gmp library, it generates a uniform random integer in the range 0 to n − 1, both included.
 
 34. REF-34 : void element_pow_zn(element_t x, element_t a, element_t n)
+        Provided by pbc library.
         Set x = a^n, where n is an element of a ring ZN for some N (typically the order of the algebraic structure x
          lies in).
 
 35. REF-35 : void element_add(element_t n, element_t a, element_t b)
+        Provided by pbc library.
         Set n to a + b.
 
 36. REF-36 : void element_invert(element_t a, element_t b)
         Provided by pbc library, it assigns inverse of element b to element a
 
 37. REF-37 : void element_mul_mpz(element_t n, element_t a, mpz_t z)
+        Provided by pbc library.
         Set n = a*z.
 
 38. REF-38 : void element_pairing(element_t out, element_t in1, element_t in2)
@@ -143,73 +154,96 @@
          G1, G2, GT. (In our case, G1=G2)
 
 39. REF-39 : void element_to_mpz(mpz_t z, element_t e)
+        Provided by pbc library.
         Converts e to a GMP integer z if such an operation makes sense
 
 40. REF-40 : Function: void mpz_add (mpz_t rop, const mpz_t op1, const mpz_t op2)
+        Provided by gmp library.
         Set rop to op1 + op2.
 
 41. REF-41 : void mpz_nextprime(mpz_t rop, const mpz_t op);
+        Provided by gmp library.
         Set rop to hold the smallest prime number greater than op.
 
 42. REF-42 : void mpz_mul (mpz_t rop, const mpz_t op1, const mpz_t op2)
+        Provided by gmp library.
         Set rop to op1 times op2.
 
 43. REF-43 : void mpz_sub_ui (mpz_t rop, const mpz_t op1, unsigned long int op2)
+        Provided by gmp library.
         Set rop to op1 − op2.
 
 44. REF-44 : int mpz_invert (mpz_t rop, const mpz_t op1, const mpz_t op2);
+        Provided by gmp library.
         The function returns the inverse of an integer a modulo n, which is an integer b such that:
             (a×b)mod n = 1
         The function returns a non-zero value if the inverse exists (i.e., if op1 and op2 are coprime), and zero if
          no inverse exists.
 
 45. REF-45 : void mpz_powm (mpz_t rop, const mpz_t base, const mpz_t exp, const mpz_t mod)
+        Provided by gmp library.
         Set rop to (base raised to exp) modulo mod.
 
 46. REF-46 : void element_div(element_t n, element_t a, element_t b)
+        Provided by pbc library.
         Set n = a / b.
 
 47. REF-47 : void mpz_ui_pow_ui (mpz_t rop, unsigned long int base, unsigned long int exp)
+        Provided by gmp library.
         Set rop to base raised to exp. The case 0^0 yields 1.
 
 48. REF-48 : void mpf_set_z (mpf_t rop, const mpz_t op)
+        Provided by gmp library.
         Set the value of rop from op.
 
 49. REF-49 : mpf_t
+        Provided by gmp library.
         Data type offered by GMP library for storing large floating point number.
 
 50. REF-50 : void mpf_init (mpf_t x)
+        Provided by gmp library.
         Initialize x to 0.
 
 51. REF-51 : void mpf_mul (mpf_t rop, const mpf_t op1, const mpf_t op2)
+        Provided by gmp library.
         Set rop to op1 times op2.
 
 52. REF-52 : void mpf_sub (mpf_t rop, const mpf_t op1, const mpf_t op2)
+        Provided by gmp library.
         Set rop to op1 − op2.
 
 53. REF-53 : void mpf_mul_ui (mpf_t rop, const mpf_t op1, unsigned long int op2)
+        Provided by gmp library.
         Set rop to op1 times op2.
 
 54. REF-54 : void mpz_init_set(mpz_t rop, const mpz_t op)
+        Provided by gmp library.
         Initialize rop, and set its value to op.
 
 55. REF-55 : void mpz_set_f (mpz_t rop, const mpf_t op)
+        Provided by gmp library.
         Set the value of rop from op.
 
 56. REF-56 : void mpz_abs (mpz_t rop, const mpz_t op)
+        Provided by gmp library.
         Set rop to the absolute value of op.
 
 57. REF-57 : void element_set_mpz(element_t e, mpz_t z)
+        Provided by pbc library.
         Set e to z.
 
 58. REF-58 : void element_set_si(element_t e, signed long int i)
+        Provided by pbc library.
         Set e to i.
 
 59. REF-59 : void mpf_div_ui (mpf_t rop, const mpf_t op1, unsigned long int op2)
+        Provided by gmp library.
         Set rop to op1/op2.
 
 60. REF-60 : void mpf_add (mpf_t rop, const mpf_t op1, const mpf_t op2)
+        Provided by gmp library.
         Set rop to op1 + op2.
 
 61. REF-61 : void mpz_neg (mpz_t rop, const mpz_t op)
+        Provided by gmp library.
         Set rop to −op.
