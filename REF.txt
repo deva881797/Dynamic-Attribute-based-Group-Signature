@@ -200,7 +200,7 @@
         Provided by gmp library.
         Data type offered by GMP library for storing large floating point number.
 
-50. REF-50 : void mpf_init (mpf_t x)
+50. REF-50 : void mpf_init (mpf_t x) or void mpf_inits (x1, x2, NULL)
         Provided by gmp library.
         Initialize x to 0.
 
