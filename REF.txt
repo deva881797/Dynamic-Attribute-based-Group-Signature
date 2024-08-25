@@ -1,8 +1,8 @@
 01. REF-01 : mpz_t
     	Data type offered by GMP library for storing large integers.
 
-02. REF-02 : void mpz_init (mpz_t x) or mpz_inits(x1, x2, NULL):
-   	    Implemented by the GMP library, the function initializes the variable passed and sets its value to 0
+02. REF-02 : void mpz_init (mpz_t x) or mpz_inits(x1, x2, NULL)
+   	Implemented by the GMP library, the function initializes the variable passed and sets its value to 0
        	Pseudo code for self-implementation (instead of using mpz_init(mpz_t x)):
    	    	x = 0;
 
