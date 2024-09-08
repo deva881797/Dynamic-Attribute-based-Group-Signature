@@ -1,0 +1,276 @@
+----------------Setup Algorithm------------------
+P(order of bilinear group) = 37123
+Total Attributes = 16
+Message (m' bits): 1000101101100011
+
+----------------KenGen Algorithm------------------
+Group Public Key : 
+  h = [88046, 163050]
+  Omega = [193581, 103031]
+  Water Function : [249177, 154248]
+  Generator Attributes : For particlar attributes you can print
+  Groth Sahai Proof Vectors :
+        u[0]: [291253, 181670]
+        u_dash[0]: [291253, 181670]
+        v[0]: [171285, 125039]
+        u[1]: [65907, 238955]
+        u_dash[1]: [145552, 221987]
+        v[1]: [247313, 244561]
+        u[2]: [162745, 50336]
+        u_dash[2]: [162745, 50336]
+        v[2]: [172850, 216221]
+        u[3]: [237521, 12542]
+        u_dash[3]: [123989, 45870]
+        v[3]: [3578, 87322]
+Issuing key : 
+  Gamma = 7234
+  Set S = For particular attributes of secrets you can print
+Opener key = 28105
+Tracer key = 32136
+
+----------------Joint Algorithm for User U1------------------
+User U1 sends :
+  Yi_dash : [257429, 54973]
+Group Manager sends :
+  y1_dash_dash : 7457
+  A1 : [117966, 38414]
+  X1_2 : [204574, 111319]
+  T1_3 : [244208, 27972]
+  T1_10 : [36092, 33601]
+  T1_8 : [246948, 4264]
+  T1_4 : [289756, 162218]
+  T1_11 : [136040, 24998]
+  T1_6 : [80208, 132438]
+  T1_12 : [80653, 92415]
+  T1_7 : [59472, 249888]
+  T1_14 : [277107, 30410]
+User U1 processing : 
+
+   -----First Verification Done by user-----
+
+  Digital Signature Sigma_1 for : 
+        A1 : [117966, 38414]
+        X1_2 : [204574, 111319]
+        Y1 : [49481, 110143]
+   Processing i.e. DSig_usk1 :
+Group Manager GM processing : 
+----GM verifies U1 digital Signature----
+GM sends X1_1 = [91961, 81415]
+User U1 processing : 
+----Verification passed : U1 owns the membership----
+User1 Secret Key : 
+   Valid Membership Certificates : 
+        A1 = [117966, 38414]
+        X1 = [91961, 81415] [204574, 111319]
+        y1 = 6039
+   Attribute certificate :
+  T1_3 : [244208, 27972]
+  T1_10 : [36092, 33601]
+  T1_8 : [246948, 4264]
+  T1_4 : [289756, 162218]
+  T1_11 : [136040, 24998]
+  T1_6 : [80208, 132438]
+  T1_12 : [80653, 92415]
+  T1_7 : [59472, 249888]
+  T1_14 : [277107, 30410]
+
+
+----------------Build Tree Algorithm------------------
+Root  : 207115621
+Node 2: -12957619
+Node 3: -122994239
+Node 4: -233030859
+Node 5: 2708881
+Node 6: 5842181
+Node 7: 8975481
+Node 8: -11886959
+Node 9: 2001451
+Node 10: 15889861
+Node 11: -174252
+Node 12: -436355
+Node 13: -698458
+Node 14: -7635
+Node 15: -425479
+Node 16: -843323
+Node 17: -529157
+Node 18: 138949
+Node 19: 807055
+Node 20: -473249
+Node 21: -596984
+Node 22: -720719
+Node 23: 25986
+Node 24: 34692
+Node 25: 43398
+Node 26: 211
+Node 27: 17002
+Node 28: 33793
+Node 29: 31051
+Node 30: 32385
+Node 31: 33719
+Node 32: 345
+Node 33: 13652
+Node 34: 26959
+Node 35: 20868
+Node 36: 36583
+Node 37: 52298
+Node 38: 31105
+Node 39: 28267
+Node 40: 25429
+Node 41: 12806
+Node 42: 24661
+Node 43: 36516
+Node 44: 11756
+Node 45: 25591
+Node 46: 39426
+
+
+----------------Build Tree Validity Algorithm------------------
+Attributes :    13
+Root  : 207115621
+Node 0: 0
+Node 3: -122994239
+Node 4: -233030859
+Node 0: 0
+Node 0: 0
+Node 7: 8975481
+Node 0: 0
+Node 9: 2001451
+Node 10: 15889861
+Node 0: 0
+Node 0: 0
+Node 13: -698458
+Node 0: 0
+Node 0: 0
+Node 16: -843323
+Node 0: 0
+Node 0: 0
+Node 19: 807055
+Node 20: -473249
+Node 0: 0
+Node 22: -720719
+Node 0: 0
+Node 0: 0
+Node 25: 43398
+Node 0: 0
+Node 0: 0
+Node 28: 33793
+Node 0: 0
+Node 0: 0
+Node 31: 33719
+Node 0: 0
+Node 0: 0
+Node 34: 26959
+Node 0: 0
+Node 0: 0
+Node 37: 52298
+Node 0: 0
+Node 0: 0
+Node 40: 25429
+Node 41: 12806
+Node 0: 0
+Node 43: 36516
+Node 0: 0
+Node 0: 0
+Node 46: 39426
+
+-----Buildtree algorithm valid-----
+
+
+s  : 207115621
+st1  : 121144760
+st2  : 85970861
+
+*----------------Sign Algorithm for U1------------------
+Attributes :    4       5       7       8       9       11      12      13      15
+Root  : 207115621
+Node 2: -12957619
+Node 3: -122994239
+Node 4: -233030859
+Node 5: 2708881
+Node 6: 5842181
+Node 7: 8975481
+Node 8: -11886959
+Node 9: 2001451
+Node 10: 15889861
+Node 0: 0
+Node 12: -436355
+Node 13: -698458
+Node 14: -7635
+Node 15: -425479
+Node 16: -843323
+Node 17: -529157
+Node 18: 138949
+Node 19: 807055
+Node 20: -473249
+Node 21: -596984
+Node 22: -720719
+Node 0: 0
+Node 0: 0
+Node 25: 43398
+Node 0: 0
+Node 27: 17002
+Node 28: 33793
+Node 29: 31051
+Node 0: 0
+Node 31: 33719
+Node 32: 345
+Node 33: 13652
+Node 34: 26959
+Node 35: 20868
+Node 0: 0
+Node 37: 52298
+Node 38: 31105
+Node 39: 28267
+Node 40: 25429
+Node 41: 12806
+Node 0: 0
+Node 43: 36516
+Node 44: 11756
+Node 0: 0
+Node 46: 39426
+
+-----Signing verification valid-----
+
+
+s  : 207115621
+st1  : -2935043686232
+st2  : 2935250801853
+
+-----Signer has valid Membership Cerficate-----
+-----Signer has valid Attribute Cerficate-----
+-----Signer has valid ID-----
+-----Water Signature valid-----
+-----yi commited valid-----
+-----Xi commited valid-----
+-----Non-frameability Adversary checked valid-----
+
+  User U1 Signature :
+        rho1 : [117966, 38414]
+        rho2 : 6039
+        rho3,1 : [91961, 81415]
+        rho3,2 : [204574, 111319]
+        rho4 : [93085, 240160]
+        rho5 : [284677, 84502]
+        rho6 : [160243, 251470]
+        rho7,1 : [204808, 242852]
+        rho7,2 : [201842, 198721]
+        rho8 : [31179, 248588]
+        rho9 : [228519, 228918]
+        sigma1 : [47852, 261697] [24047, 265043]
+        sigma2_1 : [275467, 201862] [222512, 55107]
+        sigma2_2 : [267001, 82882] [150265, 209972]
+        sigma3,1 : [47852, 261697] [60828, 62915]
+        sigma3,2 : [76469, 24562] [21533, 37946]
+        sigma4 : [47852, 261697] [41271, 106255]
+        sigma5 : [47852, 261697] [193306, 181523]
+
+-----Verify algorithm valid for User1-----
+
+*----------OpenUser verified-----------
+  ----OpenUser verifies U1 digital Signature----
+        ---User Identity 1 ---
+
+----Tracer is valid----
+U1 Attribute Name:    4   5   7   8   9   11   12   13   15
+
+'::+-'*-++-*'-+::'
