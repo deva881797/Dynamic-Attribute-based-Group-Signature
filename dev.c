@@ -26,6 +26,7 @@ ABOUT:
 #include <stdlib.h>
 
 #define num_user 4 // Define the global variable for total number of users
+#define STOP_COMPILATION() __attribute__((error("Compilation stopped"))) // For stoping complilation
 
 typedef struct Node
 {
@@ -179,6 +180,7 @@ void random_prime_bits(mpz_t result, mpz_t n)
     if (mpz_cmp_ui(n, 1) <= 0)  // REF-07
     {
         printf("NO PRIME EXISTS\n");
+        STOP_COMPILATION()
     }
     else
     {
