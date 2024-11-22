@@ -40,15 +40,15 @@ ABOUT:
         function body
         - References are mentioned in the format [REF-<Number>]
 
-    IMPORTANT NOTE : Whenever a FUNCTION/DATA-TYPE is encountered for the first time according to the flow mentioned
-    above, it is explained in the 'REF.txt' file. For the next time, the Duplicate explanation is avoided. If an
-    explanation to FUNCTION/DATA-TYPE is required next time it is being read, please search it in 'REF.txt' file, note
-    the reference number & search the explanation of function/data-type by searching [REF-<Number>].
+    IMPORTANT NOTE : Whenever a DATA-TYPE is encountered for the first time according to the flow mentioned
+    above, it is explained in the 'REF.txt' file. If an explanation to DATA-TYPE is required next time it is being read,
+    please search it in 'REF.txt' file, note the reference number & search the explanation of data-type by searching
+    [REF-<Number>].
 
     (It took more effort to avoid duplicate explanation, than it would have taken by writing explanation again.
     Since, it was a good practice to avoid duplicate explanation, I have used such a technique.)
 
-    Following is the WORKING CODE (with comments & descriptions at suitable places) in C programming language for the
+    dev.c is the WORKING CODE (with comments & descriptions at suitable places) in C programming language for the
     Section "4 Construction" of the paper. The output for the code is present in the file 'output.txt'.
 
     The code can be compiled using - 'gcc dev.c -lpbc -lgmp' and can be executed using './a.out'
